@@ -2,7 +2,7 @@
     <div class="container mt-5">
         <div class="header row gap-4">
             <div class="col">
-                <h1 class="bold">Good Morning, Demaxl!👋</h1>
+                <h1 class="bold display-5">Good Morning, Demaxl!👋</h1>
                 <h3 class="text-muted mt-2">Today, Wed 6 July 2023</h3>
             </div>
             <div class="col-md-6">
@@ -20,16 +20,23 @@
                 </div>
             </div>
         </div>
+        <TodoList />
     </div>
 </template>
 
-<script></script>
+<script>
+import TodoList from './components/TodoList.vue'
+
+export default {
+    name: 'App',
+    components: { TodoList }
+}
+</script>
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 $background-color: #f4f4f4;
-// $background-color: #eee;
 
 * {
     box-sizing: border-box;
@@ -52,12 +59,7 @@ body {
     .date {
         height: 50px;
         .chevron {
-            // background-color: #eee;
             background-color: $background-color;
-            // width: 30px;
-            // height: 30px;
-            // padding: 10px;
-            // font-size: 40px;
         }
     }
 }
