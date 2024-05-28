@@ -49,7 +49,7 @@ export default {
     height: 30px !important;
     border-color: #ccc;
     border-width: 1.5px;
-    transition: background-color 0.2s;
+    transition: background-color 0.5s;
 
     &:checked {
         background-color: black;
