@@ -24,7 +24,7 @@
         >
             <div class="todo-time text-center me-2 py-2 px-3 rounded-3">
                 <span class="" uk-icon="icon: clock"></span>
-                {{ startTime }} - {{ endTime }}
+                {{ startDateTimeString }} - {{ endTimeString }}
             </div>
             <div class="p-2 rounded-3">
                 <span uk-icon="icon: more-vertical"></span>
@@ -35,11 +35,24 @@
 
 <script>
 export default {
-    props: ['title', 'startTime', 'endTime', 'isComplete'],
+    props: ['title', 'startDateTime', 'endDateTime', 'isComplete'],
     data() {
-        return {}
+        return {
+            // title: this.itemTitle,
+            // startDateTime: this.itemstartDateTime,
+            // endDateTime: this.itemEndTime,
+            // isComplete: this.itemIsComplete
+        }
     },
-    methods: {}
+    computed: {
+        startDateTimeString() {
+            return `${this.startDateTime.getHours().toString().padStart(2, 0)}:${this.startDateTime.getMinutes().toString().padStart(2, 0)}`
+        },
+
+        endTimeString() {
+            return `${this.endDateTime.getHours().toString().padStart(2, 0)}:${this.endDateTime.getMinutes().toString().padStart(2, 0)}`
+        }
+    }
 }
 </script>
 

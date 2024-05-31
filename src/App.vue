@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
         <div class="header row gap-4">
             <div class="col">
                 <h1 class="bold display-5">Good Morning, Demaxl!👋</h1>
@@ -20,16 +20,74 @@
                 </div>
             </div>
         </div>
-        <TodoList />
+        <TodoList :tasks="tasks" />
+
+        <div class="create-task-container d-flex flex-column justify-content-center mt-5">
+            <TodoItemCreate v-show="showTaskCreateContainer" @taskCreateEvent="createTodoItem" />
+
+            <button
+                class="btn btn-dark p-2 px-3 rounded-5 mt-4 w-50 mx-auto"
+                @click="showTaskCreateContainer = !showTaskCreateContainer"
+            >
+                <span class="me-2" uk-icon="icon: plus"></span>Create new task
+            </button>
+        </div>
     </div>
 </template>
 
 <script>
 import TodoList from './components/TodoList.vue'
+import TodoItemCreate from './components/TodoItemCreate.vue'
 
 export default {
     name: 'App',
-    components: { TodoList }
+    components: { TodoList, TodoItemCreate },
+    data() {
+        return {
+            showTaskCreateContainer: true,
+            tasks: [
+                {
+                    id: 1,
+                    title: 'Jogging',
+                    startDateTime: new Date('2024T06:00:00'),
+                    endDateTime: new Date('2024T07:30:00'),
+                    isComplete: true
+                },
+                {
+                    id: 2,
+                    title: 'Read a book',
+                    startDateTime: new Date('2024T08:00:00'),
+                    endDateTime: new Date('2024T09:00:00'),
+                    isComplete: false
+                },
+                {
+                    id: 3,
+                    title: 'Wireframing a new product',
+                    startDateTime: new Date('2024T09:00:00'),
+                    endDateTime: new Date('2024T11:00:00'),
+                    isComplete: true
+                }
+                // {
+                //     id: 3,
+                //     title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi blanditiis asperiores quas, officia, veniam amet tempora saepe corrupti tempore error rem quo ea delectus earum eos magnam nostrum dolore hic. Sequi quibusdam reiciendis voluptatibus non ipsam error dolorem minima explicabo quae tenetur mollitia perferendis itaque fugiat, nulla doloremque ducimus impedit?',
+                //     startDateTime: '12:00',
+                //     endDateTime: '18:00',
+                //     isComplete: true
+                // }
+            ]
+        }
+    },
+    methods: {
+        createTodoItem(title, startDateTime, endDateTime) {
+            this.tasks.push({
+                id: this.tasks.length + 1,
+                title: title,
+                startDateTime: startDateTime,
+                endDateTime: endDateTime,
+                isComplete: false
+            })
+        }
+    }
 }
 </script>
 
