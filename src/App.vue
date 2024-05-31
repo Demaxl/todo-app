@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <TodoList :tasks="tasks" />
+        <TodoList :tasks="tasks" v-if="tasks" @taskChangedEvent="taskChanged" />
 
         <div class="create-task-container d-flex flex-column justify-content-center mt-5">
             <TodoItemCreate v-show="showTaskCreateContainer" @taskCreateEvent="createTodoItem" />
@@ -45,37 +45,42 @@ export default {
     data() {
         return {
             showTaskCreateContainer: true,
-            tasks: [
-                {
-                    id: 1,
-                    title: 'Jogging',
-                    startDateTime: new Date('2024T06:00:00'),
-                    endDateTime: new Date('2024T07:30:00'),
-                    isComplete: true
-                },
-                {
-                    id: 2,
-                    title: 'Read a book',
-                    startDateTime: new Date('2024T08:00:00'),
-                    endDateTime: new Date('2024T09:00:00'),
-                    isComplete: false
-                },
-                {
-                    id: 3,
-                    title: 'Wireframing a new product',
-                    startDateTime: new Date('2024T09:00:00'),
-                    endDateTime: new Date('2024T11:00:00'),
-                    isComplete: true
-                }
-                // {
-                //     id: 3,
-                //     title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi blanditiis asperiores quas, officia, veniam amet tempora saepe corrupti tempore error rem quo ea delectus earum eos magnam nostrum dolore hic. Sequi quibusdam reiciendis voluptatibus non ipsam error dolorem minima explicabo quae tenetur mollitia perferendis itaque fugiat, nulla doloremque ducimus impedit?',
-                //     startDateTime: '12:00',
-                //     endDateTime: '18:00',
-                //     isComplete: true
-                // }
-            ]
+            tasks: null
+            // tasks: [
+            //     {
+            //         id: 1,
+            //         title: 'Jogging',
+            //         startDateTime: new Date('2024-01-01T05:00:00.000Z'),
+            //         endDateTime: new Date('2024-01-01T06:30:00.000Z'),
+            //         isComplete: true
+            //     },
+            //     {
+            //         id: 2,
+            //         title: 'Read a book',
+            //         startDateTime: new Date('2024-01-01T07:00:00.000Z'),
+            //         endDateTime: new Date('2024-01-01T08:00:00.000Z'),
+            //         isComplete: false
+            //     },
+            //     {
+            //         id: 3,
+            //         title: 'Wireframing a new product',
+            //         startDateTime: new Date('2024-01-01T08:00:00.000Z'),
+            //         endDateTime: new Date('2024-01-01T10:00:00.000Z'),
+            //         isComplete: true
+            //     }
+            // ]
         }
+    },
+    mounted() {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || []
+
+        this.tasks = tasks.map((task) => {
+            return {
+                ...task,
+                startDateTime: new Date(task.startDateTime),
+                endDateTime: new Date(task.endDateTime)
+            }
+        })
     },
     methods: {
         createTodoItem(title, startDateTime, endDateTime) {
@@ -86,6 +91,10 @@ export default {
                 endDateTime: endDateTime,
                 isComplete: false
             })
+            this.taskChanged()
+        },
+        taskChanged() {
+            localStorage.setItem('tasks', JSON.stringify(this.tasks))
         }
     }
 }

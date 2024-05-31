@@ -37,12 +37,7 @@
 export default {
     props: ['title', 'startDateTime', 'endDateTime', 'isComplete'],
     data() {
-        return {
-            // title: this.itemTitle,
-            // startDateTime: this.itemstartDateTime,
-            // endDateTime: this.itemEndTime,
-            // isComplete: this.itemIsComplete
-        }
+        return {}
     },
     computed: {
         startDateTimeString() {

@@ -21,6 +21,7 @@ export default {
     methods: {
         taskComplete(event, task) {
             task.isComplete = !task.isComplete
+            this.$emit('taskChangedEvent')
         }
     }
 }
