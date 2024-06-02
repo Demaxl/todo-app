@@ -14,11 +14,17 @@
             </div>
 
             <div class="d-flex flex-column flex-sm-row gap-4 justify-content-center">
-                <VueDatePicker v-model="startDateTime" v-bind="datePickerProps" />
+                <VueDatePicker
+                    v-model="startDateTime"
+                    v-bind="datePickerProps"
+                    :min-date="new Date()"
+                    ignore-time-validation
+                />
                 <VueDatePicker
                     v-model="endDateTime"
                     v-bind="datePickerProps"
                     placeholder="Select end date and time"
+                    :min-date="startDateTime"
                 />
             </div>
             <div class="mt-3 d-grid">
