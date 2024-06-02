@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@vuepic/vue-datepicker": "^8.7.0",
+    "animate.css": "^4.1.1",
     "vue": "^3.4.21"
   },
   "devDependencies": {

@@ -2,7 +2,9 @@
     <div class="container mt-5 mb-5">
         <div class="header row gap-4">
             <div class="col">
-                <h1 class="bold display-5">Good Morning, Demaxl!👋</h1>
+                <h1 class="bold display-5 animate__animated animate__pulse">
+                    Good Morning, Demaxl!👋
+                </h1>
                 <h3 class="text-muted mt-2">Today, Wed 6 July 2023</h3>
             </div>
             <div class="col-md-6">
@@ -23,13 +25,26 @@
         <TodoList :tasks="tasks" v-if="tasks" @taskChangedEvent="taskChanged" />
 
         <div class="create-task-container d-flex flex-column justify-content-center mt-5">
-            <TodoItemCreate v-show="showTaskCreateContainer" @taskCreateEvent="createTodoItem" />
+            <Transition
+                @before-enter="onBeforeEnter"
+                @enter="onEnter"
+                enter-active-class="animate__animated animate__fadeInUp"
+                leave-active-class="animate__animated animate__fadeOutDown"
+            >
+                <TodoItemCreate
+                    v-show="showTaskCreateContainer"
+                    @taskCreateEvent="createTodoItem"
+                />
+            </Transition>
 
             <button
                 class="btn btn-dark p-2 px-3 rounded-5 mt-4 w-50 mx-auto"
-                @click="showTaskCreateContainer = !showTaskCreateContainer"
+                @click="toggleTaskCreate"
             >
-                <span class="me-2" uk-icon="icon: plus"></span>Create new task
+                <span v-if="showTaskCreateContainer" class="me-2" uk-icon="icon: close"></span>
+                <span v-else class="me-2" uk-icon="icon: plus"></span>
+                <span v-if="showTaskCreateContainer">Cancel create</span>
+                <span v-else>Create new task</span>
             </button>
         </div>
     </div>
@@ -44,31 +59,31 @@ export default {
     components: { TodoList, TodoItemCreate },
     data() {
         return {
-            showTaskCreateContainer: true,
-            tasks: null
-            // tasks: [
-            //     {
-            //         id: 1,
-            //         title: 'Jogging',
-            //         startDateTime: new Date('2024-01-01T05:00:00.000Z'),
-            //         endDateTime: new Date('2024-01-01T06:30:00.000Z'),
-            //         isComplete: true
-            //     },
-            //     {
-            //         id: 2,
-            //         title: 'Read a book',
-            //         startDateTime: new Date('2024-01-01T07:00:00.000Z'),
-            //         endDateTime: new Date('2024-01-01T08:00:00.000Z'),
-            //         isComplete: false
-            //     },
-            //     {
-            //         id: 3,
-            //         title: 'Wireframing a new product',
-            //         startDateTime: new Date('2024-01-01T08:00:00.000Z'),
-            //         endDateTime: new Date('2024-01-01T10:00:00.000Z'),
-            //         isComplete: true
-            //     }
-            // ]
+            showTaskCreateContainer: false,
+            // tasks: null,
+            tasks: [
+                {
+                    id: 1,
+                    title: 'Jogging',
+                    startDateTime: new Date('2024-01-01T05:00:00.000Z'),
+                    endDateTime: new Date('2024-01-01T06:30:00.000Z'),
+                    isComplete: true
+                },
+                {
+                    id: 2,
+                    title: 'Read a book',
+                    startDateTime: new Date('2024-01-01T07:00:00.000Z'),
+                    endDateTime: new Date('2024-01-01T08:00:00.000Z'),
+                    isComplete: false
+                },
+                {
+                    id: 3,
+                    title: 'Wireframing a new product',
+                    startDateTime: new Date('2024-01-01T08:00:00.000Z'),
+                    endDateTime: new Date('2024-01-01T10:00:00.000Z'),
+                    isComplete: true
+                }
+            ]
         }
     },
     mounted() {
@@ -83,6 +98,9 @@ export default {
         })
     },
     methods: {
+        toggleTaskCreate() {
+            this.showTaskCreateContainer = !this.showTaskCreateContainer
+        },
         createTodoItem(title, startDateTime, endDateTime) {
             this.tasks.push({
                 id: this.tasks.length + 1,
@@ -92,9 +110,17 @@ export default {
                 isComplete: false
             })
             this.taskChanged()
+            this.toggleTaskCreate()
         },
         taskChanged() {
             localStorage.setItem('tasks', JSON.stringify(this.tasks))
+        },
+
+        onEnter() {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            })
         }
     }
 }
