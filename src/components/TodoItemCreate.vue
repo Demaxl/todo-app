@@ -4,7 +4,7 @@
             <div class="mb-3">
                 <input
                     type="text"
-                    class="form-control title-input rounded-3"
+                    class="form-control title-input rounded-3 py-23"
                     name="title"
                     id="title"
                     v-model="taskTitle"
@@ -21,8 +21,12 @@
                     placeholder="Select end date and time"
                 />
             </div>
-            <div class="mt-3 mx-auto">
-                <input type="submit" value="Save changes" class="btn btn-primary rounded-3 px-3" />
+            <div class="mt-3 d-grid">
+                <input
+                    type="submit"
+                    value="Save changes"
+                    class="btn d-block btn-primary rounded-4 px-3"
+                />
             </div>
         </div>
     </form>
@@ -61,7 +65,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import 'src/assets/scss/variables.scss';
+
 .dp__flex_display_with_input {
     align-items: unset !important;
 }
@@ -73,7 +79,22 @@ export default {
 }
 
 .title-input {
-    background-color: transparent;
-    border-color: black;
+    background-color: $background-color;
+    border: none;
+
+    &:focus {
+        background-color: $background-color;
+    }
+}
+
+form {
+    background-color: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+
+    input:focus {
+        box-shadow: none !important;
+    }
 }
 </style>
