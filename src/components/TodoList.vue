@@ -5,6 +5,7 @@
             :key="task.id"
             v-bind="task"
             @taskCompleteEvent="taskComplete($event, task)"
+            @taskDeleteEvent="this.$emit('taskDeleteEvent', task)"
         />
     </div>
 </template>

@@ -30,7 +30,7 @@
                 <div class="p-2 rounded-3 dropdown-toggle-btn" data-bs-toggle="dropdown">
                     <span uk-icon="icon: more-vertical"></span>
                     <div class="dropdown-menu justify-content-center">
-                        <button class="dropdown-item">
+                        <button class="dropdown-item" @click="this.$emit('taskDeleteEvent')">
                             <span class="delete-btn" uk-icon="icon: trash; ratio: 1"></span>
                         </button>
                     </div>
