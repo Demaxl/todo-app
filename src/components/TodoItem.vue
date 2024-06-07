@@ -26,8 +26,15 @@
                 <span class="" uk-icon="icon: clock"></span>
                 {{ startDateTimeString }} - {{ endTimeString }}
             </div>
-            <div class="p-2 rounded-3">
-                <span uk-icon="icon: more-vertical"></span>
+            <div class="dropup-center dropup">
+                <div class="p-2 rounded-3 dropdown-toggle-btn" data-bs-toggle="dropdown">
+                    <span uk-icon="icon: more-vertical"></span>
+                    <div class="dropdown-menu justify-content-center">
+                        <button class="dropdown-item">
+                            <span class="delete-btn" uk-icon="icon: trash; ratio: 1"></span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -52,6 +59,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import 'src/assets/scss/variables.scss';
+
 .todo-check {
     width: 30px !important;
     height: 30px !important;
@@ -89,5 +98,33 @@ export default {
 
 .todo-time {
     width: 170px;
+}
+
+.dropdown-menu {
+    --bs-dropdown-bg: #{$background-color};
+    --bs-dropdown-link-active-bg: none;
+    min-width: 50px !important;
+}
+
+.dropdown-toggle-btn.show::before {
+    content: ' ';
+    position: absolute;
+    left: 50%;
+    bottom: 100%; // At the top of the tooltip
+    margin-left: -5px;
+    background-color: $background-color;
+    z-index: 10 !important;
+
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--bs-border-color-translucent);
+    transform: rotate(45deg);
+}
+
+.dropdown-menu.show {
+    display: flex;
+}
+.delete-btn {
+    color: red;
 }
 </style>
