@@ -26,8 +26,8 @@
                 <span class="" uk-icon="icon: clock"></span>
                 {{ startDateTimeString }} - {{ endTimeString }}
             </div>
-            <div class="dropup-center dropup">
-                <div class="p-2 rounded-3 dropdown-toggle-btn" data-bs-toggle="dropdown">
+            <div class="dropup-center dropup cursor-pointer rounded-3">
+                <div class="p-2 dropdown-toggle-btn" data-bs-toggle="dropdown">
                     <span uk-icon="icon: more-vertical"></span>
                     <div class="dropdown-menu justify-content-center">
                         <button class="dropdown-item" @click="this.$emit('taskDeleteEvent')">
@@ -67,6 +67,7 @@ export default {
     border-color: #ccc;
     border-width: 1.5px;
     transition: background-color 0.5s;
+    cursor: pointer;
 
     &:checked {
         background-color: black;
@@ -104,6 +105,7 @@ export default {
     --bs-dropdown-bg: #{$background-color};
     --bs-dropdown-link-active-bg: none;
     min-width: 50px !important;
+    transition: all 0.2s;
 }
 
 .dropdown-toggle-btn.show::before {
@@ -126,5 +128,13 @@ export default {
 }
 .delete-btn {
     color: red;
+}
+
+.dropup {
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: #ddd;
+    }
 }
 </style>
