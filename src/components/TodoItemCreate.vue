@@ -63,9 +63,17 @@ export default {
             }
         }
     },
+    // mounted() {
+    //     this.startDateTime = null
+    //     this.endDateTime = null
+    //     this.taskTitle = null
+    // },
     methods: {
         createTask() {
             this.$emit('taskCreateEvent', this.taskTitle, this.startDateTime, this.endDateTime)
+            this.startDateTime = null
+            this.endDateTime = null
+            this.taskTitle = null
         }
     }
 }

@@ -65,8 +65,8 @@ export default {
     data() {
         return {
             showTaskCreateContainer: false,
-            // tasks: null,
-            tasks: [
+            tasks: null,
+            oldTasks: [
                 {
                     id: 1,
                     title: 'Jogging',
